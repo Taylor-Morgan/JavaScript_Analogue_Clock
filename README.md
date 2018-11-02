@@ -1,1 +1,2 @@
 # JavaScript_Analogue_Clock
+// I started with the tutorial and then improved/refactored it. The issues I wanted to solve were the visibility of the hands and the issue of the hands "spinning" when returning to "12" on the clock face.
