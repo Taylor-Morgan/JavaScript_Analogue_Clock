@@ -1,0 +1,115 @@
+<!doctype HTML>
+<html lang="english">
+    
+    <head>
+        <meta charset="UTF-8">
+        <title>JavaScript Analogue Clock</title>
+    </head>
+    
+    <body>
+        <div class="clock">
+            <div class="clock_face">
+                <div class="clock_hand hour"></div>
+                <div class="clock_hand minute"></div>
+                <div class="clock_hand second"></div>
+            </div>
+        </div>
+    </body>
+
+    <style>
+        html {
+             background: #4720a0;
+        }
+
+        .clock {
+            border: 5px solid white;
+            border-radius: 50%;
+            width: 30rem;
+            height: 30rem;
+            align-items: center;
+            position: relative;
+            margin: 50px auto;
+        }
+        
+        .clock_hand {
+            width: 50%;
+            height: 6px;
+            background: black;
+            position: absolute;
+            top: 50%;
+            transform-origin: 100%;
+        }
+        
+        .hour {
+            width: 30%;
+            left: 96px;
+            z-index: -10;
+            background: #0ff0e4;
+            transform: rotate(90deg);
+        }
+        
+        .minute {
+            width: 40%;
+            left: 48px;
+            z-index: -20;
+            background: #06fa43;
+            transform: rotate(90deg);
+        }
+        
+        .second {
+            width: 50%;
+            z-index: -30;
+            background: #ff00f2;
+            transform: rotate(90deg);
+        }
+    </style>
+    
+    <script>
+        const hourHand = document.querySelector(".hour");
+        const minuteHand = document.querySelector(".minute");
+        const secondHand = document.querySelector(".second");
+        const clockHand = document.querySelector(".clock_hand");
+
+        function setDate() {
+            const now = new Date();
+
+            const hours = now.getHours();                         //Control hour hand
+            const hoursDegrees = ((hours / 12) * 360) + 90;
+            if (hoursDegrees === 90) {                            //These "if" statements keep the clock from "spinning" when returning to "0"
+                hourHand.style.transition = `all 0s`;
+                hourHand.style.transform = `rotate(${hoursDegrees}deg)`;
+            } else {
+                hourHand.style.transition = `all 0.5s`;
+                hourHand.style.transitionTimingFunction = `cubic-bezier(0.01, 2.31, 0.65, 0.99)`;
+                hourHand.style.transform = `rotate(${hoursDegrees}deg)`;
+            }
+
+            const minutes = now.getMinutes();                     //Control minute hand
+            const minutesDegrees = ((minutes / 60) * 360) + 90;
+            if (minutesDegrees === 90) {
+                minuteHand.style.transition = `all 0s`;
+                minuteHand.style.transform = `rotate(${minutesDegrees}deg)`;
+            } else {
+                minuteHand.style.transition = `all 0.5s`;
+                minuteHand.style.transitionTimingFunction = `cubic-bezier(0.01, 2.31, 0.65, 0.99)`;
+                minuteHand.style.transform = `rotate(${minutesDegrees}deg)`;
+            }
+
+            const seconds = now.getSeconds();                      //Control second hand
+            const secondsDegrees = ((seconds / 60) * 360) + 90;
+            if (secondsDegrees === 90) {
+                secondHand.style.transition = `all 0s`;
+                secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
+            } else {
+                secondHand.style.transition = `all 0.5s`;
+                secondHand.style.transitionTimingFunction = `cubic-bezier(0.01, 2.31, 0.65, 0.99)`;
+                secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
+            }
+            
+        }
+        
+        setInterval(setDate, 1000)
+        
+    </script>
+
+</html>
